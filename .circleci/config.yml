@@ -37,7 +37,7 @@ jobs:
             aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
             aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
             aws configure set region $AWS_REGION
-            # eb init docker-react-nonginx --region $AWS_REGION --platform Docker --profile deployment
+            eb init docker-react-nonginx --region $AWS_REGION --platform "Docker running on 64bit Amazon Linux 2023"
             eb use Docker-react-nonginx-env
             eb deploy
 
