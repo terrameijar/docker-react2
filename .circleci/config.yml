@@ -25,9 +25,21 @@ jobs:
       - image: cimg/aws:2023.12
     steps:
       - checkout
+
+      # Install Deployment Dependencies
       - run:
-          name: Check AWS CLI Version
-          command: aws --version
+          name: Install Deployment Dependencies
+          command: python3 -m pip install --upgrade --user awsebcli
+
+      - run:
+          name: Deploy to ElasticBeanstalk
+          command: |
+            aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+            aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+            aws configure set region $AWS_REGION
+            # eb init docker-react-nonginx --region $AWS_REGION --platform Docker --profile deployment
+            eb use Docker-react-nonginx-env
+            eb deploy
 
 workflows:
   build_and_test:
