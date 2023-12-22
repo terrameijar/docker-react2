@@ -20,7 +20,17 @@ jobs:
           name: Run Tests
           command: npm test
 
+  deploy:
+    docker:
+      - image: cimg/aws:2023.12
+    steps:
+      - checkout
+      - run:
+          name: Check AWS CLI Version
+          command: aws --version
+
 workflows:
   build_and_test:
     jobs:
       - build
+      - deploy
