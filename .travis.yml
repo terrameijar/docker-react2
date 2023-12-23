@@ -2,6 +2,7 @@ services:
   - docker
 
 before_install:
+  - ulimit -u 1024
   - docker build -t vndlovu/docker-react2 -f Dockerfile.dev .
 
 script:
