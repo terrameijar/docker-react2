@@ -42,7 +42,13 @@ jobs:
             eb deploy
 
 workflows:
-  build_and_test:
+  build_and_deploy:
     jobs:
       - build
-      - deploy
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master

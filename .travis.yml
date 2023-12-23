@@ -1,0 +1,21 @@
+services:
+  - docker
+
+before_install:
+  - docker build -t vndlovu/docker-react2 -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true vndlovu/docker-react2 npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-west-1"
+  app: "docker"
+  env: "Docker-env"
+  bucket_name: "elasticbeanstalk-eu-west-1-009168092773"
+  bucket_path: "travis_upload"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
+  skip_cleanup: true
