@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Deployed automatically from CicleCI
+          Deployed automatically from CicleCI.
         </p>
         <a
           className="App-link"
